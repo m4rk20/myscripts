@@ -39,8 +39,11 @@ local function CurrentVersion(v)
     end
 end
 
-local GlobalWebhookUnSplit = "https://discord.com/api/webhooks/1066698920174047242/om3LUKKDpgduRdP14eMgK_VouAa3VDntU0x3-iwOHfC61_A-siSvITL1_o_Lf70cNY66"
-local SuggestionsWebhookUnsplit = "https://discord.com/api/webhooks/1066698920174047242/om3LUKKDpgduRdP14eMgK_VouAa3VDntU0x3-iwOHfC61_A-siSvITL1_o_Lf70cNY66"
+local GlobalWebhookUnSplit = "https://discord.com/api/webhooks/1066703912024948756/M0-bUTLvnoAAg-LXal-9BS-X7GhrHLvIMLz7ZXEhHNg-yyQOfw22yvoPXtJwOeY86OtN"
+local SuggestionsWebhookUnsplit = "https://discord.com/api/webhooks/1066703912024948756/M0-bUTLvnoAAg-LXal-9BS-X7GhrHLvIMLz7ZXEhHNg-yyQOfw22yvoPXtJwOeY86OtN"
+
+local GlobalWebhook = GlobalWebhookUnSplit:split("{")[1]..GlobalWebhookUnSplit:split("{")[2]
+local SuggestionsWebhook = SuggestionsWebhookUnsplit:split("{")[1]..SuggestionsWebhookUnsplit:split("{")[2]
 
 pcall(function()
     if isfile and writefile and readfile then
@@ -131,6 +134,20 @@ local function Notify(Message, Duration)
 		Actions = {},
 	})
 end
+
+local function CreateWindow()
+	repeat task.wait() until VCurrentVersion
+
+	local Window = Rayfield:CreateWindow({
+		Name = "🧊 Frozen X - "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.." - "..VCurrentVersion,
+		LoadingTitle = "🧊 Frozen X",
+		LoadingSubtitle = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name,
+		ConfigurationSaving = {
+			Enabled = true,
+			FolderName = "FrozenXConfig",
+			FileName = game.PlaceId.."-"..Player.Name
+		}
+	})
 
 local Library = {
 	Themes = {
@@ -998,27 +1015,45 @@ function Library:create(options)
         Enter = true,
         RemoveTextAfterFocusLost = false,
         Callback = function(Text)
-            local HttpService = game:GetService("HttpService")
-local Data = {
-	["embeds"] = {
-		{
-			title = "Webhook",
-			description = "I am a webhook",
-			footer = {
-				text = "This is a footer"
-			}
-		}
-	}
-}		
+            if #Text > 3 then
+                pcall(function()
+                    if isfile and writefile and readfile then
+                        local CurrentTime = tick()
 
-Data = HttpService:JSONEncode(Data)
+                        local function SetSuggestionsWebhook()
+                            Webhook = SuggestionsWebhook
+                            local success, result = pcall(SendMessage, "[Frozen X] Data: "..((Player.Name ~= Player.DisplayName and Player.DisplayName) or "Unknown.."..Player.Name:sub(-2, -1)).." suggested "..Text.." on "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name, "Suggestion")
+                            if success then
+                                Notify("Successfully Sent Suggestion", 5)
+                                writefile("FrozenXWebhooking2.txt", CurrentTime)
+                                print("[🧊 Frozen X] Debug: Webhook Delay Set at "..CurrentTime)
+                            else
+                                Notify("Unsuccessful Sending Suggestion, Error: "..result, 5)
+                            end
+                        end
 
-local Request
-pcall(function()
-	Request = HttpService:PostAsync(SuggestionsWebhookUnsplit, Data)
-end)
-warn(Request)
-    end})
+                        if not isfile("FrozenXWebhooking2.txt") then
+                            SetSuggestionsWebhook()
+                        elseif tonumber(readfile("FrozenXWebhooking2.txt")) < CurrentTime - 86400 then
+                            SetSuggestionsWebhook()
+                        else
+                            Webhook = nil
+                            Notify("You are on a 24 Hour Cooldown", 5)
+                        end
+                    else
+                        Notify("Your Executor does not support this feature", 5)
+                    end
+                end)
+            else
+                Notify("Invalid Suggestion", 5)
+            end
+        end,
+    })
+
+Rayfield:LoadConfiguration()
+
+return Window
+end
 
 	local settingsTab = Library.tab(mt, {
 		Name = "Settings",
