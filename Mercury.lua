@@ -894,6 +894,7 @@ function Library:create(options)
     suggestionTab:textbox({
         Callback = function(v)
             gui:prompt{Text = v}
+	    print("Text: ",v)
         end,
     })
 
