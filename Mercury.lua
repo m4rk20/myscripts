@@ -14,11 +14,7 @@
 █░░░░░░██████████░░░░░░█░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░░░███████░░░░░░███████
 ██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
 
-edited: 1/26
-developers:
-v3rm AbstractPoo	discord Abstract#8007
-v3rm 0xDEITY		discord Deity#0228
-
+Updated: 1/26/2023
 ]]
 if not game:IsLoaded() then
     game.Loaded:Wait()
@@ -39,13 +35,11 @@ local function CurrentVersion(v)
     end
 end
 
-local GlobalWebhookUnsplit = "https://discord.com/api/webhooks/1066825027913265163/MaGSM8HsSeMiw7eTxpl9h4jCotPJEWu2y1v40Ctos9P1dJuJ6kXin4oO4vVukdJW_TXN"
-local SuggestionsWebhookUnsplit = "https://discord.com/api/webhooks/1066825027913265163/MaGSM8HsSeMiw7eTxpl9h4jCotPJEWu2y1v40Ctos9P1dJuJ6kXin4oO4vVukdJW_TXN"
+local GlobalWebhookUnsplit = "https://discord.com/api/webhooks/1066827014981550211/VpWXbb3nZp9LnYIrNK2x6EX6_AZCO3DT_N0m93gG8Apnmmm7jzrs0qBFhufXywpzd11Q"--Private Channel
+local SuggestionsWebhookUnsplit = "https://discord.com/api/webhooks/1066827188420214854/UVAOX3CwchPWKcSU8flkYAFo72sjjl3-kEVrJ6VDjvshM4c-TPHy59MSw-9BiOkBdXWx"--Public Channel
 
 local GlobalWebhook = GlobalWebhookUnsplit:split("{")[1]..GlobalWebhookUnsplit:split("{")[2]
 local SuggestionsWebhook = SuggestionsWebhookUnsplit:split("{")[1]..SuggestionsWebhookUnsplit:split("{")[2]
-
-local HttpService = game:GetService("HttpService")
 
 pcall(function()
 	if isfile and writefile and readfile then
@@ -1012,7 +1006,12 @@ function Library:create(options)
         Icon = "http://www.roblox.com/asset/?id=8577523456"
     })
 
-    suggestionTab:textbox({
+    --suggestionTab:textbox
+local Credits = Window:CreateTab("Suggestions", 4483362458)
+
+    Credits:CreateInput({
+        Name = "Suggestion",
+        PlaceholderText = "Insert Suggestion Here",
         NumbersOnly = false,
         CharacterLimit = 300,
         Enter = true,
@@ -1029,7 +1028,7 @@ function Library:create(options)
                             if success then
                                 Notify("Successfully Sent Suggestion", 5)
                                 writefile("FrozenXWebhooking2.txt", CurrentTime)
-                                print("[🧊 Frozen X] Debug: Webhook Delay Set at "..CurrentTime)
+                                print("[Frozen X] Debug: Webhook Delay Set at "..CurrentTime)
                             else
                                 Notify("Unsuccessful Sending Suggestion, Error: "..result, 5)
                             end
@@ -1052,10 +1051,8 @@ function Library:create(options)
             end
         end,
     })
-
-Rayfield:LoadConfiguration()
-
-return Window
+    Rayfield:LoadConfiguration()
+    return Window
 end
 
 	local settingsTab = Library.tab(mt, {
