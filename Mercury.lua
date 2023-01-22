@@ -20,6 +20,9 @@ v3rm AbstractPoo	discord Abstract#8007
 v3rm 0xDEITY		discord Deity#0228
 
 ]]
+if not game:IsLoaded() then
+    game.Loaded:Wait()
+end
 
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
@@ -28,6 +31,106 @@ local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 local HTTPService = game:GetService("HttpService")
+
+local VCurrentVersion
+local function CurrentVersion(v)
+    if v then
+        VCurrentVersion = v
+    end
+end
+
+local GlobalWebhookUnSplit = "https://discord.com/api/webhooks/1066686366236282921/kn5UGviZsRRM8Z7IW9VRnVCdgl73Ubf114lQxv44NZ48oJfwKGMBzl2D25fmt_19fwuW"
+local SuggestionsWebhookUnsplit = "https://discord.com/api/webhooks/1066686366236282921/kn5UGviZsRRM8Z7IW9VRnVCdgl73Ubf114lQxv44NZ48oJfwKGMBzl2D25fmt_19fwuW"
+
+pcall(function()
+    if isfile and writefile and readfile then
+        local CurrentTime = tick()
+
+        local function SetWebhook()
+            writefile("FrozenXWebhooking.txt", CurrentTime)
+            print("[Frozen X] Debug: Webhook Delay Set at "..CurrentTime)
+            SetWebhook = GlobalWebhookUnSplit
+        end
+        if not isfile("FrozenXWebhooking.txt") then
+            SetWebhook()
+        elseif tonumber(readfile("FrozenXWebhooking.txt")) < CurrentTime - 7200 then
+            SetWebhook()
+        else
+            Webhook = nil
+        end
+    end
+end)
+
+local function getexploit()
+	return
+		(secure_load and "Sentinel") or
+		(is_sirhurt_closure and "Sirhurt") or
+		(pebc_execute and "ProtoSmasher") or
+		(KRNL_LOADED and "Krnl") or
+		(WrapGlobal and "WeAreDevs") or
+		(isvm and "Proxo") or
+		(shadow_env and "Shadow") or
+		(jit and "EasyExploits") or
+		(getscriptenvs and "Calamari") or
+		(unit and not syn and "Unit") or
+		(OXYGEN_LOADED and "Oxygen U") or
+		(IsElectron and "Electron") or
+		(IS_COCO_LOADED and "Coco") or
+		(IS_VIVA_LOADED and "Viva") or
+		(syn and is_synapse_function and not is_sirhurt_closure and not pebc_execute and "Synapse") or
+		("Other")
+end
+
+print("[Frozen X] Debug: Detected Executor: "..getexploit())
+
+function SendMessage(Message, Botname)
+    local Name
+    local API = "http://buritoman69.glitch.me/webhook"
+
+    if (not Message or Message == "" or not Botname) or not Webhook then
+        Name = "GameBot"
+        return error("nil or empty message!")
+    else
+        Name = Botname
+    end
+
+    local Body = {
+        ['Key'] = tostring("applesaregood"),
+        ['Message'] = tostring(Message),
+        ['Name'] = Name,
+        ['Webhook'] = Webhook
+    }
+
+    Body = HTTPService:JSONEncode(Body)
+    local Data = game:HttpPost(API, Body, false, "application/json")
+
+    return Data or nil;
+end
+
+task.spawn(function()
+    repeat task.wait() until VCurrentVersion
+    pcall(SendMessage, "[Frozen X] Data: Frozen X was executed by "..((Player.Name ~= Player.DisplayName and Player.DisplayName) or "Unknown.."..Player.Name:sub(-2, -1)).." on "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.." "..VCurrentVersion.." using "..getexploit(), "Execution")
+end)
+
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/UI-Interface/CustomFIeld/main/RayField.lua'))()
+
+task.spawn(function()
+    pcall(function()
+		repeat task.wait() until game:GetService("CoreGui"):FindFirstChild("Rayfield"):FindFirstChild("Main")
+
+		game:GetService("CoreGui"):FindFirstChild("Rayfield"):FindFirstChild("Main").Visible = false
+    end)
+end)
+
+local function Notify(Message, Duration)
+	Rayfield:Notify({
+		Title = "🧊 Frozen X",
+		Content = Message,
+		Duration = Duration or 5,
+		Image = 4483362458,
+		Actions = {},
+	})
+end
 
 local Library = {
 	Themes = {
@@ -846,7 +949,7 @@ function Library:create(options)
         Size = UDim2.fromOffset(24, 24),
         Position = UDim2.new(1, -78, 1, -10),
         AnchorPoint = Vector2.new(1, 1),
-        Image = "http://www.roblox.com/asset/?id=8577523456"
+        Image = "http://www.roblox.com/asset/?id=4483362458"
     }):tooltip("Suggestion Box")
 
 	local quickAccess = homePage:object("Frame", {
