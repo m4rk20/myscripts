@@ -14,7 +14,7 @@
 █░░░░░░██████████░░░░░░█░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░░░███████░░░░░░███████
 ██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
 
-Updated: 1/26/2023
+Last Updated: 1/22/2023
 ]]
 if not game:IsLoaded() then
     game.Loaded:Wait()
@@ -35,8 +35,8 @@ local function CurrentVersion(v)
     end
 end
 
-local GlobalWebhookUnsplit = "https://discord.com/api/webhooks/1066827014981550211/VpWXbb3nZp9LnYIrNK2x6EX6_AZCO3DT_N0m93gG8Apnmmm7jzrs0qBFhufXywpzd11Q"--Private Channel
-local SuggestionsWebhookUnsplit = "https://discord.com/api/webhooks/1066827188420214854/UVAOX3CwchPWKcSU8flkYAFo72sjjl3-kEVrJ6VDjvshM4c-TPHy59MSw-9BiOkBdXWx"--Public Channel
+local GlobalWebhookUnsplit = ""--Private Channel
+local SuggestionsWebhookUnsplit = "https://hooks.zapier.com/hooks/catch/14357500/bvdzdee/"--Public Channel
 
 local GlobalWebhook = GlobalWebhookUnsplit:split("{")[1]..GlobalWebhookUnsplit:split("{")[2]
 local SuggestionsWebhook = SuggestionsWebhookUnsplit:split("{")[1]..SuggestionsWebhookUnsplit:split("{")[2]
@@ -47,7 +47,7 @@ pcall(function()
 
 		local function SetWebhook()
 			writefile("FrozenXWebhooking.txt", CurrentTime)
-			print("[Frozen X] Debug: Webhook Delay Set at "..CurrentTime)
+			print("[🧊 Frozen X] Debug: Webhook Delay Set at "..CurrentTime)
 			Webhook = GlobalWebhook
 		end
 
@@ -1005,7 +1005,10 @@ function Library:create(options)
         Internal = suggestionTabIcon,
         Icon = "http://www.roblox.com/asset/?id=8577523456"
     })
-
+    -- local url = "https://hooks.zapier.com/hooks/catch/14357500/bvdzdee/"
+    -- local data0 = {"What You Want To Send To Discord"}
+    -- local newdata0 = game:GetService'HttpService':JSONEncode(data0)
+    -- game:HttpPost(url,newdata0)
     --suggestionTab:textbox
 local Credits = Window:CreateTab("Suggestions", 4483362458)
 
