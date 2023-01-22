@@ -840,6 +840,15 @@ function Library:create(options)
 		Image = "http://www.roblox.com/asset/?id=8577523456"
 	}):tooltip("credits")
 
+    local suggestionTabIcon = profile:object("ImageButton", {
+        BackgroundTransparency = 1,
+        Theme = {ImageColor3 = "WeakText"},
+        Size = UDim2.fromOffset(24, 24),
+        Position = UDim2.new(1, -78, 1, -10),
+        AnchorPoint = Vector2.new(1, 1),
+        Image = "http://www.roblox.com/asset/?id=8577523456"
+    }):tooltip("Suggestion Box")
+
 	local quickAccess = homePage:object("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, -20, 0, 180)
@@ -874,6 +883,20 @@ function Library:create(options)
 		nilFolder = core:object("Folder"),
 	}, Library)
 
+    local suggestionTab = Library.tab(mt, {
+        Name = "Suggestions",
+        Internal = suggestionTabIcon,
+        Icon = "http://www.roblox.com/asset/?id=8577523456"
+    })
+
+    suggestionTab:_theme_selector()
+
+    suggestionTab:textbox({
+        Callback = function(v)
+            gui:prompt{Text = v}
+        end,
+    })
+
 	local settingsTab = Library.tab(mt, {
 		Name = "Settings",
 		Internal = settingsTabIcon,
@@ -885,7 +908,7 @@ function Library:create(options)
 	settingsTab:keybind{
 		Name = "Toggle Key",
 		Description = "Key to show/hide the UI.",
-		Keybind = Enum.KeyCode.Delete,
+		Keybind = Enum.KeyCode.F,
 		Callback = function()
 			self.Toggled = not self.Toggled
 			Library:show(self.Toggled)
