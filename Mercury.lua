@@ -978,11 +978,11 @@ function Library:create(options)
                             Webhook = SuggestionsWebhook
                             local success, result = pcall(SendMessage, "[Inferno X] Data: "..((Player.Name ~= Player.DisplayName and Player.DisplayName) or "Unknown.."..Player.Name:sub(-2, -1)).." suggested "..Text.." on "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name, "Suggestion")
                             if success then
-                                Notify("Successfully Sent Suggestion", 5)
+                                print("Successfully Sent Suggestion", 5)
                                 writefile("InfernoXWebhooking2.txt", CurrentTime)
                                 print("[Inferno X] Debug: Webhook Delay Set at "..CurrentTime)
                             else
-                                Notify("Unsuccessful Sending Suggestion, Error: "..result, 5)
+                                print("Unsuccessful Sending Suggestion, Error: "..result, 5)
                             end
                         end
     
@@ -992,14 +992,14 @@ function Library:create(options)
                             SetSuggestionsWebhook()
                         else
                             Webhook = nil
-                            Notify("You are on a 24 Hour Cooldown", 5)
+                            print("You are on a 24 Hour Cooldown", 5)
                         end
                     else
-                        Notify("Your Executor does not support this feature", 5)
+                        print("Your Executor does not support this feature", 5)
                     end
                 end)
             else
-                Notify("Invalid Suggestion", 5)
+                print("Invalid Suggestion", 5)
             end
         end,
     })
