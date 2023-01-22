@@ -39,8 +39,8 @@ local function CurrentVersion(v)
     end
 end
 
-local GlobalWebhookUnSplit = "https://discord.com/api/webhooks/1066686366236282921/kn5UGviZsRRM8Z7IW9VRnVCdgl73Ubf114lQxv44NZ48oJfwKGMBzl2D25fmt_19fwuW"
-local SuggestionsWebhookUnsplit = "https://discord.com/api/webhooks/1066686366236282921/kn5UGviZsRRM8Z7IW9VRnVCdgl73Ubf114lQxv44NZ48oJfwKGMBzl2D25fmt_19fwuW"
+local GlobalWebhookUnSplit = "https://discord.com/api/webhooks/1066698164490485830/vlsaDh9EAku95fn5_E3yXCNnb8eSR2D60wDUtCWebzJ16EJ3EM1BzsmJ_tsR88o7PRgz"
+local SuggestionsWebhookUnsplit = "https://discord.com/api/webhooks/1066698164490485830/vlsaDh9EAku95fn5_E3yXCNnb8eSR2D60wDUtCWebzJ16EJ3EM1BzsmJ_tsR88o7PRgz"
 
 pcall(function()
     if isfile and writefile and readfile then
@@ -998,7 +998,26 @@ function Library:create(options)
         Enter = true,
         RemoveTextAfterFocusLost = false,
         Callback = function(Text)
-            
+            local HttpService = game:GetService("HttpService")
+local Data = {
+	["embeds"] = {
+		{
+			title = "Webhook",
+			description = "I am a webhook",
+			footer = {
+				text = "This is a footer"
+			}
+		}
+	}
+}		
+
+Data = HttpService:JSONEncode(Data)
+
+local Request
+pcall(function()
+	Request = HttpService:PostAsync("URL_HERE", Data)
+end)
+warn(Request)
     end})
 
 	local settingsTab = Library.tab(mt, {
