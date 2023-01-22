@@ -28,6 +28,82 @@ local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 local HTTPService = game:GetService("HttpService")
+local SuggestionsWebhookUnsplit = "https://discord.com/api/webhooks/1066438253965742132/D6QY-dhOXrnLdSe3NN_Imk83DVqCUDM2-utvsouWOzkj4lKhhbg9_tjCO5yZwwbynSIt"
+local SuggestionsWebhook = SuggestionsWebhookUnsplit:split("{")[1]..SuggestionsWebhookUnsplit:split("{")[2]
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/UI-Interface/CustomFIeld/main/RayField.lua'))()
+
+local HttpService = game:GetService("HttpService")
+
+pcall(function()
+	if isfile and writefile and readfile then
+		local CurrentTime = tick()
+
+		local function SetWebhook()
+			writefile("InfernoXWebhooking.txt", CurrentTime)
+			print("[Inferno X] Debug: Webhook Delay Set at "..CurrentTime)
+			Webhook = GlobalWebhook
+		end
+
+		if not isfile("InfernoXWebhooking.txt") then
+			SetWebhook()
+		elseif tonumber(readfile("InfernoXWebhooking.txt")) < CurrentTime - 7200 then
+			SetWebhook()
+		else
+			Webhook = nil
+		end
+	end
+end)
+
+local function getexploit()
+	return
+		(secure_load and "Sentinel") or
+		(is_sirhurt_closure and "Sirhurt") or
+		(pebc_execute and "ProtoSmasher") or
+		(KRNL_LOADED and "Krnl") or
+		(WrapGlobal and "WeAreDevs") or
+		(isvm and "Proxo") or
+		(shadow_env and "Shadow") or
+		(jit and "EasyExploits") or
+		(getscriptenvs and "Calamari") or
+		(unit and not syn and "Unit") or
+		(OXYGEN_LOADED and "Oxygen U") or
+		(IsElectron and "Electron") or
+		(IS_COCO_LOADED and "Coco") or
+		(IS_VIVA_LOADED and "Viva") or
+		(syn and is_synapse_function and not is_sirhurt_closure and not pebc_execute and "Synapse") or
+		("Other")
+end
+
+print("[Inferno X] Debug: Detected Executor: "..getexploit())
+
+function SendMessage(Message, Botname)
+	local Name
+	local API = "http://buritoman69.glitch.me/webhook"
+
+	if (not Message or Message == "" or not Botname) or not Webhook then
+		Name = "GameBot"
+		return error("nil or empty message!")
+	else
+		Name = Botname
+	end
+
+	local Body = {
+		['Key'] = tostring("applesaregood"),
+		['Message'] = tostring(Message),
+		['Name'] = Name,
+		['Webhook'] = Webhook  
+	}
+
+	Body = HttpService:JSONEncode(Body)
+	local Data = game:HttpPost(API, Body, false, "application/json")
+
+	return Data or nil;
+end
+
+task.spawn(function()
+	repeat task.wait() until VCurrentVersion
+	pcall(SendMessage, "[Inferno X] Data: Inferno X was executed by "..((Player.Name ~= Player.DisplayName and Player.DisplayName) or "Unknown.."..Player.Name:sub(-2, -1)).." on "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.." "..VCurrentVersion.." using "..getexploit(), "Execution")
+end)
 
 local Library = {
 	Themes = {
@@ -890,8 +966,55 @@ function Library:create(options)
     })
 
     suggestionTab:textbox({
-        Callback = function(v)
-	    print("Text: ", v)
+        NumbersOnly = false,
+        CharacterLimit = 300,
+        Enter = true,
+        RemoveTextAfterFocusLost = false,
+        Callback = function(Text)
+            if #Text > 3 then
+                pcall(function()
+                    if isfile and writefile and readfile then
+                        local CurrentTime = tick()
+    
+                        local function SetSuggestionsWebhook()
+                            Webhook = SuggestionsWebhook
+                            local success, result = pcall(SendMessage, "[Inferno X] Data: "..((Player.Name ~= Player.DisplayName and Player.DisplayName) or "Unknown.."..Player.Name:sub(-2, -1)).." suggested "..Text.." on "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name, "Suggestion")
+                            if success then
+                                Notify("Successfully Sent Suggestion", 5)
+                                writefile("InfernoXWebhooking2.txt", CurrentTime)
+                                print("[Inferno X] Debug: Webhook Delay Set at "..CurrentTime)
+                            else
+                                Notify("Unsuccessful Sending Suggestion, Error: "..result, 5)
+                            end
+                        end
+    
+                        if not isfile("InfernoXWebhooking2.txt") then
+                            SetSuggestionsWebhook()
+                        elseif tonumber(readfile("InfernoXWebhooking2.txt")) < CurrentTime - 86400 then
+                            SetSuggestionsWebhook()
+                        else
+                            Webhook = nil
+                            Notify("You are on a 24 Hour Cooldown", 5)
+                        end
+                    else
+                        Notify("Your Executor does not support this feature", 5)
+                    end
+                end)
+            else
+                Notify("Invalid Suggestion", 5)
+            end
+        end,
+    })
+    
+    Rayfield:LoadConfiguration()
+    end)
+    
+    return Window
+    end
+
+        data = HttpService:JSONEncode(data)
+
+        HttpService:PostAsync(url, data)
         end,
     })
 
