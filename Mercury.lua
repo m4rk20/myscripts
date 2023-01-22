@@ -39,8 +39,8 @@ local function CurrentVersion(v)
     end
 end
 
-local GlobalWebhookUnSplit = "https://discord.com/api/webhooks/1066698164490485830/vlsaDh9EAku95fn5_E3yXCNnb8eSR2D60wDUtCWebzJ16EJ3EM1BzsmJ_tsR88o7PRgz"
-local SuggestionsWebhookUnsplit = "https://discord.com/api/webhooks/1066698164490485830/vlsaDh9EAku95fn5_E3yXCNnb8eSR2D60wDUtCWebzJ16EJ3EM1BzsmJ_tsR88o7PRgz"
+local GlobalWebhookUnSplit = "https://discord.com/api/webhooks/1066698920174047242/om3LUKKDpgduRdP14eMgK_VouAa3VDntU0x3-iwOHfC61_A-siSvITL1_o_Lf70cNY66"
+local SuggestionsWebhookUnsplit = "https://discord.com/api/webhooks/1066698920174047242/om3LUKKDpgduRdP14eMgK_VouAa3VDntU0x3-iwOHfC61_A-siSvITL1_o_Lf70cNY66"
 
 pcall(function()
     if isfile and writefile and readfile then
@@ -1015,7 +1015,7 @@ Data = HttpService:JSONEncode(Data)
 
 local Request
 pcall(function()
-	Request = HttpService:PostAsync("URL_HERE", Data)
+	Request = HttpService:PostAsync(SuggestionsWebhookUnsplit, Data)
 end)
 warn(Request)
     end})
