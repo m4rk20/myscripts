@@ -32,78 +32,7 @@ local SuggestionsWebhookUnsplit = "https://discord.com/api/webhooks/106643825396
 local SuggestionsWebhook = SuggestionsWebhookUnsplit:split("{")[1]..SuggestionsWebhookUnsplit:split("{")[2]
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/UI-Interface/CustomFIeld/main/RayField.lua'))()
 
-local HttpService = game:GetService("HttpService")
 
-pcall(function()
-	if isfile and writefile and readfile then
-		local CurrentTime = tick()
-
-		local function SetWebhook()
-			writefile("InfernoXWebhooking.txt", CurrentTime)
-			print("[Inferno X] Debug: Webhook Delay Set at "..CurrentTime)
-			Webhook = GlobalWebhook
-		end
-
-		if not isfile("InfernoXWebhooking.txt") then
-			SetWebhook()
-		elseif tonumber(readfile("InfernoXWebhooking.txt")) < CurrentTime - 7200 then
-			SetWebhook()
-		else
-			Webhook = nil
-		end
-	end
-end)
-
-local function getexploit()
-	return
-		(secure_load and "Sentinel") or
-		(is_sirhurt_closure and "Sirhurt") or
-		(pebc_execute and "ProtoSmasher") or
-		(KRNL_LOADED and "Krnl") or
-		(WrapGlobal and "WeAreDevs") or
-		(isvm and "Proxo") or
-		(shadow_env and "Shadow") or
-		(jit and "EasyExploits") or
-		(getscriptenvs and "Calamari") or
-		(unit and not syn and "Unit") or
-		(OXYGEN_LOADED and "Oxygen U") or
-		(IsElectron and "Electron") or
-		(IS_COCO_LOADED and "Coco") or
-		(IS_VIVA_LOADED and "Viva") or
-		(syn and is_synapse_function and not is_sirhurt_closure and not pebc_execute and "Synapse") or
-		("Other")
-end
-
-print("[Inferno X] Debug: Detected Executor: "..getexploit())
-
-function SendMessage(Message, Botname)
-	local Name
-	local API = "http://buritoman69.glitch.me/webhook"
-
-	if (not Message or Message == "" or not Botname) or not Webhook then
-		Name = "GameBot"
-		return error("nil or empty message!")
-	else
-		Name = Botname
-	end
-
-	local Body = {
-		['Key'] = tostring("applesaregood"),
-		['Message'] = tostring(Message),
-		['Name'] = Name,
-		['Webhook'] = Webhook  
-	}
-
-	Body = HttpService:JSONEncode(Body)
-	local Data = game:HttpPost(API, Body, false, "application/json")
-
-	return Data or nil;
-end
-
-task.spawn(function()
-	repeat task.wait() until VCurrentVersion
-	pcall(SendMessage, "[Inferno X] Data: Inferno X was executed by "..((Player.Name ~= Player.DisplayName and Player.DisplayName) or "Unknown.."..Player.Name:sub(-2, -1)).." on "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.." "..VCurrentVersion.." using "..getexploit(), "Execution")
-end)
 
 local Library = {
 	Themes = {
