@@ -48,7 +48,7 @@ pcall(function()
 
         local function SetWebhook()
             writefile("FrozenXWebhooking.txt", CurrentTime)
-            print("[Frozen X] Debug: Webhook Delay Set at "..CurrentTime)
+            print("[🧊 Frozen X] Debug: Webhook Delay Set at "..CurrentTime)
             SetWebhook = GlobalWebhookUnSplit
         end
         if not isfile("FrozenXWebhooking.txt") then
@@ -81,7 +81,7 @@ local function getexploit()
 		("Other")
 end
 
-print("[Frozen X] Debug: Detected Executor: "..getexploit())
+print("[🧊 Frozen X] Debug: Detected Executor: "..getexploit())
 
 function SendMessage(Message, Botname)
     local Name
@@ -109,7 +109,7 @@ end
 
 task.spawn(function()
     repeat task.wait() until VCurrentVersion
-    pcall(SendMessage, "[Frozen X] Data: Frozen X was executed by "..((Player.Name ~= Player.DisplayName and Player.DisplayName) or "Unknown.."..Player.Name:sub(-2, -1)).." on "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.." "..VCurrentVersion.." using "..getexploit(), "Execution")
+    pcall(SendMessage, "[🧊 Frozen X] Data: Frozen X was executed by "..((Player.Name ~= Player.DisplayName and Player.DisplayName) or "Unknown.."..Player.Name:sub(-2, -1)).." on "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.." "..VCurrentVersion.." using "..getexploit(), "Execution")
 end)
 
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/UI-Interface/CustomFIeld/main/RayField.lua'))()
@@ -124,7 +124,7 @@ end)
 
 local function Notify(Message, Duration)
 	Rayfield:Notify({
-		Title = "🔥 Frozen X",
+		Title = "🧊 Frozen X",
 		Content = Message,
 		Duration = Duration or 5,
 		Image = 4483362458,
