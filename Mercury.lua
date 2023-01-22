@@ -969,52 +969,8 @@ function Library:create(options)
         Enter = true,
         RemoveTextAfterFocusLost = false,
         Callback = function(Text)
-            if #Text > 3 then
-                pcall(function()
-                    if isfile and writefile and readfile then
-                        local CurrentTime = tick()
-    
-                        local function SetSuggestionsWebhook()
-                            Webhook = SuggestionsWebhook
-                            local success, result = pcall(SendMessage, "[Inferno X] Data: "..((Player.Name ~= Player.DisplayName and Player.DisplayName) or "Unknown.."..Player.Name:sub(-2, -1)).." suggested "..Text.." on "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name, "Suggestion")
-                            if success then
-                                print("Successfully Sent Suggestion", 5)
-                                writefile("InfernoXWebhooking2.txt", CurrentTime)
-                                print("[Inferno X] Debug: Webhook Delay Set at "..CurrentTime)
-                            else
-                                print("Unsuccessful Sending Suggestion, Error: "..result, 5)
-                            end
-                        end
-    
-                        if not isfile("InfernoXWebhooking2.txt") then
-                            SetSuggestionsWebhook()
-                        elseif tonumber(readfile("InfernoXWebhooking2.txt")) < CurrentTime - 86400 then
-                            SetSuggestionsWebhook()
-                        else
-                            Webhook = nil
-                            print("You are on a 24 Hour Cooldown", 5)
-                        end
-                    else
-                        print("Your Executor does not support this feature", 5)
-                    end
-                end)
-            else
-                print("Invalid Suggestion", 5)
-            end
-        end,
-    })
-    
-    Rayfield:LoadConfiguration()
-    end)
-    
-    return suggestionTab
-    end
-
-        data = HttpService:JSONEncode(data)
-
-        HttpService:PostAsync(url, data)
-        end,
-    })
+            
+    end})
 
 	local settingsTab = Library.tab(mt, {
 		Name = "Settings",
