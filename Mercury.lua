@@ -14,7 +14,11 @@
 █░░░░░░██████████░░░░░░█░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░░░███████░░░░░░███████
 ██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
 
-edited: 1/22/2023
+edited: 1/26
+developers:
+v3rm AbstractPoo	discord Abstract#8007
+v3rm 0xDEITY		discord Deity#0228
+
 ]]
 if not game:IsLoaded() then
     game.Loaded:Wait()
@@ -35,8 +39,10 @@ local function CurrentVersion(v)
     end
 end
 
-local SuggestionsWebhookUnsplit = "https://hooks.zapier.com/hooks/catch/14357500/bvdoom9/"
+local GlobalWebhookUnsplit = "https://discord.com/api/webhooks/1066825027913265163/MaGSM8HsSeMiw7eTxpl9h4jCotPJEWu2y1v40Ctos9P1dJuJ6kXin4oO4vVukdJW_TXN"
+local SuggestionsWebhookUnsplit = "https://discord.com/api/webhooks/1066825027913265163/MaGSM8HsSeMiw7eTxpl9h4jCotPJEWu2y1v40Ctos9P1dJuJ6kXin4oO4vVukdJW_TXN"
 
+local GlobalWebhook = GlobalWebhookUnsplit:split("{")[1]..GlobalWebhookUnsplit:split("{")[2]
 local SuggestionsWebhook = SuggestionsWebhookUnsplit:split("{")[1]..SuggestionsWebhookUnsplit:split("{")[2]
 
 local HttpService = game:GetService("HttpService")
@@ -48,7 +54,7 @@ pcall(function()
 		local function SetWebhook()
 			writefile("FrozenXWebhooking.txt", CurrentTime)
 			print("[Frozen X] Debug: Webhook Delay Set at "..CurrentTime)
-			Webhook = SuggestionsWebhook
+			Webhook = GlobalWebhook
 		end
 
 		if not isfile("FrozenXWebhooking.txt") then
