@@ -28,9 +28,6 @@ local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 local HTTPService = game:GetService("HttpService")
-local SuggestionsWebhookUnsplit = "https://discord.com/api/webhooks/1066438253965742132/D6QY-dhOXrnLdSe3NN_Imk83DVqCUDM2-utvsouWOzkj4lKhhbg9_tjCO5yZwwbynSIt"
-local SuggestionsWebhook = SuggestionsWebhookUnsplit:split("{")[1]..SuggestionsWebhookUnsplit:split("{")[2]
-local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/UI-Interface/CustomFIeld/main/RayField.lua'))()
 
 pcall(function()
 	if isfile and writefile and readfile then
