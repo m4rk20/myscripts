@@ -889,12 +889,9 @@ function Library:create(options)
         Icon = "http://www.roblox.com/asset/?id=8577523456"
     })
 
-    suggestionTab:_theme_selector()
-
     suggestionTab:textbox({
         Callback = function(v)
-            gui:prompt{Text = v}
-	    print("Text: ",v)
+	    print("Text: ", v)
         end,
     })
 
