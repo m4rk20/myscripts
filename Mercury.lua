@@ -28,91 +28,91 @@ local LocalPlayer = Players.LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 local HTTPService = game:GetService("HttpService")
 
-local VCurrentVersion
-local function CurrentVersion(v)
-    if v then
-        VCurrentVersion = v
-    end
-end
+-- local VCurrentVersion
+-- local function CurrentVersion(v)
+--     if v then
+--         VCurrentVersion = v
+--     end
+-- end
 
-local GlobalWebhookUnsplit = ""--Private Channel
-local SuggestionsWebhookUnsplit = "https://hooks.zapier.com/hooks/catch/14357500/bvdzdee/"--Public Channel
+-- local GlobalWebhookUnsplit = "https://hooks.zapier.com/hooks/catch/14357500/bvdoom9/"--Private Channel
+-- local SuggestionsWebhookUnsplit = "https://hooks.zapier.com/hooks/catch/14357500/bvdoom9/"--Public Channel
 
-local GlobalWebhook = GlobalWebhookUnsplit:split("{")[1]..GlobalWebhookUnsplit:split("{")[2]
-local SuggestionsWebhook = SuggestionsWebhookUnsplit:split("{")[1]..SuggestionsWebhookUnsplit:split("{")[2]
+-- local GlobalWebhook = GlobalWebhookUnsplit:split("{")[1]..GlobalWebhookUnsplit:split("{")[2]
+-- local SuggestionsWebhook = SuggestionsWebhookUnsplit:split("{")[1]..SuggestionsWebhookUnsplit:split("{")[2]
 
-pcall(function()
-	if isfile and writefile and readfile then
-		local CurrentTime = tick()
+-- pcall(function()
+-- 	if isfile and writefile and readfile then
+-- 		local CurrentTime = tick()
 
-		local function SetWebhook()
-			writefile("FrozenXWebhooking.txt", CurrentTime)
-			print("[🧊 Frozen X] Debug: Webhook Delay Set at "..CurrentTime)
-			Webhook = GlobalWebhook
-		end
+-- 		local function SetWebhook()
+-- 			writefile("FrozenXWebhooking.txt", CurrentTime)
+-- 			print("[🧊 Frozen X] Debug: Webhook Delay Set at "..CurrentTime)
+-- 			Webhook = GlobalWebhook
+-- 		end
 
-		if not isfile("FrozenXWebhooking.txt") then
-			SetWebhook()
-		elseif tonumber(readfile("FrozenXWebhooking.txt")) < CurrentTime - 7200 then
-			SetWebhook()
-		else
-			Webhook = nil
-		end
-	end
-end)
+-- 		if not isfile("FrozenXWebhooking.txt") then
+-- 			SetWebhook()
+-- 		elseif tonumber(readfile("FrozenXWebhooking.txt")) < CurrentTime - 7200 then
+-- 			SetWebhook()
+-- 		else
+-- 			Webhook = nil
+-- 		end
+-- 	end
+-- end)
 
-local function getexploit()
-	return
-		(secure_load and "Sentinel") or
-		(is_sirhurt_closure and "Sirhurt") or
-		(pebc_execute and "ProtoSmasher") or
-		(KRNL_LOADED and "Krnl") or
-		(WrapGlobal and "WeAreDevs") or
-		(isvm and "Proxo") or
-		(shadow_env and "Shadow") or
-		(jit and "EasyExploits") or
-		(getscriptenvs and "Calamari") or
-		(unit and not syn and "Unit") or
-		(OXYGEN_LOADED and "Oxygen U") or
-		(IsElectron and "Electron") or
-		(IS_COCO_LOADED and "Coco") or
-		(IS_VIVA_LOADED and "Viva") or
-		(syn and is_synapse_function and not is_sirhurt_closure and not pebc_execute and "Synapse") or
-		("Other")
-end
+-- local function getexploit()
+-- 	return
+-- 		(secure_load and "Sentinel") or
+-- 		(is_sirhurt_closure and "Sirhurt") or
+-- 		(pebc_execute and "ProtoSmasher") or
+-- 		(KRNL_LOADED and "Krnl") or
+-- 		(WrapGlobal and "WeAreDevs") or
+-- 		(isvm and "Proxo") or
+-- 		(shadow_env and "Shadow") or
+-- 		(jit and "EasyExploits") or
+-- 		(getscriptenvs and "Calamari") or
+-- 		(unit and not syn and "Unit") or
+-- 		(OXYGEN_LOADED and "Oxygen U") or
+-- 		(IsElectron and "Electron") or
+-- 		(IS_COCO_LOADED and "Coco") or
+-- 		(IS_VIVA_LOADED and "Viva") or
+-- 		(syn and is_synapse_function and not is_sirhurt_closure and not pebc_execute and "Synapse") or
+-- 		("Other")
+-- end
 
-print("[🧊 Frozen X] Debug: Detected Executor: "..getexploit())
+-- print("[🧊 Frozen X] Debug: Detected Executor: "..getexploit())
 
-function SendMessage(Message, Botname)
-    local Name
-    local API = "http://buritoman69.glitch.me/webhook"
+-- function SendMessage(Message, Botname)
+--     local Name
+--     local API = "http://buritoman69.glitch.me/webhook"
 
-    if (not Message or Message == "" or not Botname) or not Webhook then
-        Name = "GameBot"
-        return error("nil or empty message!")
-    else
-        Name = Botname
-    end
+--     if (not Message or Message == "" or not Botname) or not Webhook then
+--         Name = "GameBot"
+--         return error("nil or empty message!")
+--     else
+--         Name = Botname
+--     end
 
-    local Body = {
-        ['Key'] = tostring("applesaregood"),
-        ['Message'] = tostring(Message),
-        ['Name'] = Name,
-        ['Webhook'] = Webhook
-    }
+--     local Body = {
+--         ['Key'] = tostring("applesaregood"),
+--         ['Message'] = tostring(Message),
+--         ['Name'] = Name,
+--         ['Webhook'] = Webhook
+--     }
 
-    Body = HTTPService:JSONEncode(Body)
-    local Data = game:HttpPost(API, Body, false, "application/json")
+--     Body = HTTPService:JSONEncode(Body)
+--     local Data = game:HttpPost(API, Body, false, "application/json")
 
-    return Data or nil;
-end
+--     return Data or nil;
+-- end
 
-task.spawn(function()
-    repeat task.wait() until VCurrentVersion
-    pcall(SendMessage, "[🧊 Frozen X] Data: Frozen X was executed by "..((Player.Name ~= Player.DisplayName and Player.DisplayName) or "Unknown.."..Player.Name:sub(-2, -1)).." on "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.." "..VCurrentVersion.." using "..getexploit(), "Execution")
-end)
+-- task.spawn(function()
+--     repeat task.wait() until VCurrentVersion
+--     pcall(SendMessage, "[🧊 Frozen X] Data: Frozen X was executed by "..((Player.Name ~= Player.DisplayName and Player.DisplayName) or "Unknown.."..Player.Name:sub(-2, -1)).." on "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.." "..VCurrentVersion.." using "..getexploit(), "Execution")
+-- end)
 
-local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/UI-Interface/CustomFIeld/main/RayField.lua'))()
+-- local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/UI-Interface/CustomFIeld/main/RayField.lua'))()
 
 task.spawn(function()
     pcall(function()
@@ -1010,53 +1010,53 @@ function Library:create(options)
     -- local newdata0 = game:GetService'HttpService':JSONEncode(data0)
     -- game:HttpPost(url,newdata0)
     --suggestionTab:textbox
-local Credits = Window:CreateTab("Suggestions", 4483362458)
+-- local Credits = Window:CreateTab("Suggestions", 4483362458)
 
-    Credits:CreateInput({
-        Name = "Suggestion",
-        PlaceholderText = "Insert Suggestion Here",
-        NumbersOnly = false,
-        CharacterLimit = 300,
-        Enter = true,
-        RemoveTextAfterFocusLost = false,
-        Callback = function(Text)
-            if #Text > 3 then
-                pcall(function()
-                    if isfile and writefile and readfile then
-                        local CurrentTime = tick()
+--     Credits:CreateInput({
+--         Name = "Suggestion",
+--         PlaceholderText = "Insert Suggestion Here",
+--         NumbersOnly = false,
+--         CharacterLimit = 300,
+--         Enter = true,
+--         RemoveTextAfterFocusLost = false,
+--         Callback = function(Text)
+--             if #Text > 3 then
+--                 pcall(function()
+--                     if isfile and writefile and readfile then
+--                         local CurrentTime = tick()
 
-                        local function SetSuggestionsWebhook()
-                            Webhook = SuggestionsWebhook
-                            local success, result = pcall(SendMessage, "[Frozen X] Data: "..((Player.Name ~= Player.DisplayName and Player.DisplayName) or "Unknown.."..Player.Name:sub(-2, -1)).." suggested "..Text.." on "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name, "Suggestion")
-                            if success then
-                                Notify("Successfully Sent Suggestion", 5)
-                                writefile("FrozenXWebhooking2.txt", CurrentTime)
-                                print("[Frozen X] Debug: Webhook Delay Set at "..CurrentTime)
-                            else
-                                Notify("Unsuccessful Sending Suggestion, Error: "..result, 5)
-                            end
-                        end
+--                         local function SetSuggestionsWebhook()
+--                             Webhook = SuggestionsWebhook
+--                             local success, result = pcall(SendMessage, "[Frozen X] Data: "..((Player.Name ~= Player.DisplayName and Player.DisplayName) or "Unknown.."..Player.Name:sub(-2, -1)).." suggested "..Text.." on "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name, "Suggestion")
+--                             if success then
+--                                 Notify("Successfully Sent Suggestion", 5)
+--                                 writefile("FrozenXWebhooking2.txt", CurrentTime)
+--                                 print("[Frozen X] Debug: Webhook Delay Set at "..CurrentTime)
+--                             else
+--                                 Notify("Unsuccessful Sending Suggestion, Error: "..result, 5)
+--                             end
+--                         end
 
-                        if not isfile("FrozenXWebhooking2.txt") then
-                            SetSuggestionsWebhook()
-                        elseif tonumber(readfile("FrozenXWebhooking2.txt")) < CurrentTime - 86400 then
-                            SetSuggestionsWebhook()
-                        else
-                            Webhook = nil
-                            Notify("You are on a 24 Hour Cooldown", 5)
-                        end
-                    else
-                        Notify("Your Executor does not support this feature", 5)
-                    end
-                end)
-            else
-                Notify("Invalid Suggestion", 5)
-            end
-        end,
-    })
-    Rayfield:LoadConfiguration()
-    return Window
-end
+--                         if not isfile("FrozenXWebhooking2.txt") then
+--                             SetSuggestionsWebhook()
+--                         elseif tonumber(readfile("FrozenXWebhooking2.txt")) < CurrentTime - 86400 then
+--                             SetSuggestionsWebhook()
+--                         else
+--                             Webhook = nil
+--                             Notify("You are on a 24 Hour Cooldown", 5)
+--                         end
+--                     else
+--                         Notify("Your Executor does not support this feature", 5)
+--                     end
+--                 end)
+--             else
+--                 Notify("Invalid Suggestion", 5)
+--             end
+--         end,
+--     })
+--     Rayfield:LoadConfiguration()
+--     return Window
+-- end
 
 	local settingsTab = Library.tab(mt, {
 		Name = "Settings",
