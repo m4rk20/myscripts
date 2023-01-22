@@ -45,6 +45,8 @@ local SuggestionsWebhookUnsplit = "https://hooks.zapier.com/hooks/catch/14357500
 local GlobalWebhook = GlobalWebhookUnsplit:split("{")[1]..GlobalWebhookUnsplit:split("{")[2]
 local SuggestionsWebhook = SuggestionsWebhookUnsplit:split("{")[1]..SuggestionsWebhookUnsplit:split("{")[2]
 
+local HttpService = game:GetService("HttpService")
+
 pcall(function()
 	if isfile and writefile and readfile then
 		local CurrentTime = tick()
