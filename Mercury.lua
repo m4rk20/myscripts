@@ -124,7 +124,7 @@ end)
 
 local function Notify(Message, Duration)
 	Rayfield:Notify({
-		Title = "🧊 Frozen X",
+		Title = "🔥 Frozen X",
 		Content = Message,
 		Duration = Duration or 5,
 		Image = 4483362458,
