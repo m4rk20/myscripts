@@ -454,7 +454,7 @@ function Library:create(options)
 		Name = "Frozen X",
 		Size = UDim2.fromOffset(600, 400),
 		Theme = self.Themes[settings.Theme],
-		Link = "https://github.com/deeeity/mercury-lib"
+		Link = "https://github.com/m4rk20/myscripts/blob/main/MercuryUI"
 	}, options)
 
 	if getgenv and getgenv().MercuryUI then
