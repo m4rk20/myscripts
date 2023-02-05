@@ -49,7 +49,6 @@ end
 print("[Frozen X] Debug: Detected Executor: "..getexploit())
 
 local Library = {
-	Flags = {},
 	Themes = {
 		Legacy = {
 			Main = Color3.fromHSV(262/360, 60/255, 34/255),
