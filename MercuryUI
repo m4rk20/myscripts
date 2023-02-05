@@ -118,34 +118,6 @@ local Library = {
 
 }
 
-local function LoadConfiguration(Configuration)
-	local Data = HttpService:JSONDecode(Configuration)
-	table.foreach(Data, function(FlagName, FlagValue)
-		if Library.Flags[FlagName] then
-			spawn(function() 
-				if Library.Flags[FlagName].Type == "Colorpicker" then
-					Library.Flags[FlagName]:Set(UnpackColor(FlagValue))
-				else
-					if Library.Flags[FlagName].value or Library.Flags[FlagName].CurrentKeybind or Library.Flags[FlagName].CurrentOption ~= FlagValue then Library.Flags[FlagName]:Set(FlagValue) end
-				end    
-			end)
-		end
-	end)
-end
-
-local function SaveConfiguration()
-	if not CEnabled then return end
-	local Data = {}
-	for i,v in pairs(Library.Flags) do
-		if v.Type == "Colorpicker" then
-			Data[i] = PackColor(v.value)
-		else
-			Data[i] = v.value or v.CurrentKeybind or v.CurrentOption
-		end
-	end	
-	writefile(ConfigurationFolder .. "/" .. CFileName .. ConfigurationExtension, tostring(HttpService:JSONEncode(Data)))
-end
-
 Library.__index = Library
 
 local selectedTab
