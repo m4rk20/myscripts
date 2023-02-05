@@ -126,7 +126,7 @@ local function LoadConfiguration(Configuration)
 				if Library.Flags[FlagName].Type == "Colorpicker" then
 					Library.Flags[FlagName]:Set(UnpackColor(FlagValue))
 				else
-					if Library.Flags[FlagName].CurrentValue or Library.Flags[FlagName].CurrentKeybind or Library.Flags[FlagName].CurrentOption ~= FlagValue then Library.Flags[FlagName]:Set(FlagValue) end
+					if Library.Flags[FlagName].value or Library.Flags[FlagName].CurrentKeybind or Library.Flags[FlagName].CurrentOption ~= FlagValue then Library.Flags[FlagName]:Set(FlagValue) end
 				end    
 			end)
 		end
@@ -138,9 +138,9 @@ local function SaveConfiguration()
 	local Data = {}
 	for i,v in pairs(Library.Flags) do
 		if v.Type == "Colorpicker" then
-			Data[i] = PackColor(v.CurrentValue)
+			Data[i] = PackColor(v.value)
 		else
-			Data[i] = v.CurrentValue or v.CurrentKeybind or v.CurrentOption
+			Data[i] = v.value or v.CurrentKeybind or v.CurrentOption
 		end
 	end	
 	writefile(ConfigurationFolder .. "/" .. CFileName .. ConfigurationExtension, tostring(HttpService:JSONEncode(Data)))
