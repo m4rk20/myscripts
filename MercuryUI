@@ -49,6 +49,7 @@ end
 print("[Frozen X] Debug: Detected Executor: "..getexploit())
 
 local Library = {
+	Flags = {},
 	Themes = {
 		Legacy = {
 			Main = Color3.fromHSV(262/360, 60/255, 34/255),
@@ -117,6 +118,10 @@ local Library = {
 
 }
 
+local MercuryFolder = "FrozenX"
+local ConfigurationFolder = FrozenX.."/Configurations"
+local ConcigurationExtension = ".froz"
+
 Library.__index = Library
 
 local selectedTab
@@ -153,6 +158,23 @@ function Library:change_theme(toTheme)
 			element:tween{[property] = modifiedColor}
 		end
 	end
+end
+
+local function PackColor(Color)
+	return {R = Color.R * 255, G = Color.G * 255, B = Color.B *255}
+end
+
+local function UnpackColor(Color)
+	return Color3.fromRGB(Color.R, Color.G, Color.B)
+end
+
+local function LoadConfiguration(Configuration)
+	local Data = HTTPService:JSONDecode(Configuration)
+	table.foreach(Data, function(FlagName, FlagValue)
+		if Library.Flags[FlagName, FlagValue] then
+			
+		end
+	end)
 end
 
 function Library:object(class, properties)
@@ -678,7 +700,7 @@ function Library:create(options)
 		Position = UDim2.new(0, 5, 1, -6),
 		Size = UDim2.new(0.2, 0, 0, 10),
 		Font = Enum.Font.SourceSans,
-		Text = "Status | Idle",
+		Text = "🔥 Frozen X - "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name,   
 		Theme = {TextColor3 = "Tertiary"},
 		TextSize = 14,
 		TextXAlignment = Enum.TextXAlignment.Left
